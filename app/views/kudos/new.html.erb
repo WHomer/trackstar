@@ -1,0 +1,26 @@
+<h1>Give a Kudo</h1>
+
+<%= form_with model: @kudo, local: true, class: "" do |f| %>
+	<div class="form-group row">
+  	<%= f.label :reason, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+  		<%= f.text_field :reason, class: 'form-control', autofocus: true %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+  	<%= f.label :message, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+  		<%= f.text_area :message, class: 'form-control', autofocus: true %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :sent_to_user_id, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <%= f.collection_select :sent_to_user_id, @send_to_users, :id, :email, {}, {class: 'form-control'} %>
+    </div>
+  </div>
+	
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>

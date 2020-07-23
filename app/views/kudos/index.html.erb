@@ -1,0 +1,68 @@
+<h1>Kudos</h1>
+<p>Every week, each user receives three Kudos to give to other users within their organization. Kudos do not accumulate so make sure you are sending out your Kudos!</p>
+
+<div class="card">
+  <div class="card-header">
+    <h3>Kudos Gave</h3>
+    <div>
+      Kudos To Give: <%= @kudos_facade.kudos_to_give %>
+    </div>
+    <% if @kudos_facade.kudos_to_give > 0 %>
+      <%= link_to "Give Kudos", new_kudo_path %>
+    <% else %>
+      <%= link_to "Give Kudos (No Kudos left to give)", new_kudo_path, class: "btn-link disabled" %>
+    <% end %>
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Reason</th>
+          <th scope="col">Message</th>
+          <th scope="col">Date</th>
+          <th scope="col">Received From</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @kudos_facade.kudos_gave.each do |kudo| %>
+          <tr>
+            <td><%= kudo.reason %></td>
+            <td><%= kudo.message %></td>
+            <td><%= kudo.created_at.strftime("%m/%d/%Y") %></td>
+            <td><%= kudo.sent_to_user.email %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<br/>
+
+<div class="card">
+  <div class="card-header">
+    <h3>Kudos Received</h3>
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Reason</th>
+          <th scope="col">Message</th>
+          <th scope="col">Date</th>
+          <th scope="col">Sent To</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @kudos_facade.kudos_received.each do |kudo| %>
+          <tr>
+            <td><%= kudo.reason %></td>
+            <td><%= kudo.message %></td>
+            <td><%= kudo.created_at.strftime("%m/%d/%Y") %></td>
+            <td><%= kudo.sent_by_user.email %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
